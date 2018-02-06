@@ -9,12 +9,15 @@ Course is structured for weekly sessions 4 days per week.
         * `/basics/data_types/sizes.go`
         * `/basics/conditonal_flow/main.go`
         * Create an application that declares a variable called `myName` in the global scope of the appropriate type for a name and declare another variable in the same space that is the appropriate type to be able to store an unsigned integer up to 255 and call it `myInt`. In the main function, initialize the two variables and declare and initialize a new variable called `myBool` and assign it the value `false` with values and perform various dummy if/else and switch statement operations on them to demonstrate a solid understanding of conditional flow in Go.
-    * __Day Two:__ Complex Data Types and Loops
+    * __Day Two:__ Complex Data Types and Functions
         * `/basics/data_types/structures.go`
         * `/basics/data_types/slices.go`
         * `/basics/data_types/maps.go`
+        * Todo: Exercise
+    * __Day Three:__ Loops and Pointers
         * `/basics/loops/main.go`
-        * Create an application that loops through a `map[int][]user` where the `int` denotes the group number that each slice, `[]user`, is a part of. The map will contain static data, and `user` will be a struct that has the fields `FirstName`, `LastName`, and `Age` that use appropriate data types.
+        * `/basics/data_types/pointers` todo
+        * Create an application that loops through a `map[int][]user` where the `int` denotes the group number that each slice, `[]user`, is a part of. The map will contain static data, and `user` will be a struct that has the fields `FirstName`, `LastName`, and `Age` that use appropriate data types. Within the loop call a function attached to each `user` struct that prints the first name, last name, and age of a user in a formatted fashion.
     * __Day Three:__ HTTP Protocol Basics
         * [Google Slides over HTTP Protocol](https://docs.google.com/presentation/d/1zhBy-JPEnv8wT42-xI_GyYihmN8DnpuYvnCPX8_VOZ4/edit?usp=sharing)
         * `/web/full_webserver_example/*`
