@@ -8,7 +8,7 @@ Course is structured for weekly sessions 4 days per week.
         * `/basics/data_types/basic.go`
         * `/basics/data_types/sizes.go`
         * `/basics/conditonal_flow/main.go`
-        * Create an application demonstrating solid understanding of simple data types and conditional flow within Go.
+        * Create an application that declares a variable called `myName` in the global scope of the appropriate type for a name and declare another variable in the same space that is the appropriate type to be able to store an unsigned integer up to 255 and call it `myInt`. In the main function, initialize the two variables and declare and initialize a new variable called `myBool` and assign it the value `false` with values and perform various dummy if/else and switch statement operations on them to demonstrate a solid understanding of conditional flow in Go.
     * __Day Two:__ Complex Data Types and Loops
         * `/basics/data_types/structures.go`
         * `/basics/data_types/slices.go`

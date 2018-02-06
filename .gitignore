@@ -1,2 +1,5 @@
 # Ignore JetBrains IDE Hidden Folder
 .idea/
+
+# Ignore boltdb files
+**.db
