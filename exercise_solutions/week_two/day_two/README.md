@@ -1,0 +1,1 @@
+The solution to this excercise can be found at `/web/minimal_examples/mux/default.go`.

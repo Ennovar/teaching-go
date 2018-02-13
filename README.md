@@ -29,7 +29,7 @@ Course is structured for weekly sessions 4 days per week.
         * The standard for naming functions, variables, and constants is strictly camel-case. No hyphens or underscores.
         * The standards for naming packages and interfaces can be found [here](https://golang.org/doc/effective_go.html#names).
         * The standards for comments within your code for the purpose of having a healthy godoc can be found [here](https://golang.org/doc/effective_go.html#commentary).
-        * `/basics/architecture/*` (under construction)
+        * `/basics/architecture/*`
         * Questions over conventions, commenting, and architecture.
         * Extra-curricular learning after week one: Todd McLeod's playlist on YouTube ["Build Web Apps with Golang"](https://www.youtube.com/playlist?list=PLSak_q1UXfPp2VwUQ4ZdUVJdMO6pfi5v_) (Start at video #4).
 * __Week Two (under construction)__
@@ -43,3 +43,8 @@ Course is structured for weekly sessions 4 days per week.
         * `/web/minimal_examples/no-mux/main.go`
         * `/web/minimal_examples/server/main.go`
         * Questions over Examples
+        * Create a simple web server using the `http.DefaultServeMux` with at least two patterns.
+    * __Day Three:__ Using Templates to Render HTML Content
+        * `/web/templates/*`
+        * Questions over the templating code
+        * Create a web server with two routes that use templates. There is no need to make the templates look nice, just make it functional.
