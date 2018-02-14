@@ -23,6 +23,8 @@ func main() {
 
 	log.Println("The server is listening on localhost:3000. CTRL+C to stop listening...")
 
+	// Using the value of nil as the handle since the DefaultServeMux
+	// is being used.
 	err := http.ListenAndServe("localhost:3000", nil)
 	if err != nil {
 		log.Fatalf("A fatal error has occurred: %v\n", err.Error())

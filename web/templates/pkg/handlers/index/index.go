@@ -9,9 +9,11 @@ import (
 func Index(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/" {
 		w.WriteHeader(http.StatusNotFound)
+
 		handlers.ExecuteTemplate(w, handlers.Data{
 			PageTitle: "404",
 		}, "templates/status/404.html")
+
 		return
 	}
 
