@@ -1,0 +1,8 @@
+1. A multiplexer routes requests based off of a string pattern and a handler or handler function. Handler takes an interface (struct) that implements a method named ServeHTTP with parameters http.ResponseWriter and *http.Request. HandleFunc takes a function named anything that has the parameters http.ResponseWriter and *http.Request.
+2. nil
+3. html/template
+4. {{ define "layout" }} ... html content... {{ end }}
+5. {{ template "navigation" }}
+6. POST, PUT, DELETE, GET
+7. False
+8. json.Marshal takes an interface and marshals it into a stringified JSON object ready to be written to the response body. json.Unmarshal/json.Decoder.Decode takes a slice of bytes or a io.Reader type, respectively, each of which containing a stringified JSON object, and inserts the values into an interface.

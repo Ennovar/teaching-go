@@ -47,9 +47,20 @@ This course is geared towards people who already have experience programming in 
         * Questions over Examples
         * Create a simple web server using the `http.DefaultServeMux` with at least two patterns.
     * __Day Three:__ Using Templates to Render HTML Content
-        * `/web/templates/*`
+        * `/web/templates_simple/*`
         * Questions over the templating code
         * Create a web server with two routes that use templates. There is no need to make the templates look nice, just make it functional.
     * __Day Four:__ Writing APIs alongside Templates
+        * `/web/templates_complex/*`
+        * Questions over APIs and serving static files with different routes
+        * Answer the following questions in a text file:
+            * (1) What is a multiplexer and what is the difference between the functions `Handle` and `HandleFunc` which are attached to the multiplexer struct?
+            * (2) When using the `http.DefaultServeMux` what argument must be passed to the handler parameter of `http.ListenAndServe` or the "Handler" struct field of `http.Server`?
+            * (3) What package handles templates for HTML files?
+            * (4) How do you define a template name?
+            * (5) How do you insert a template by name into a template?
+            * (6) What are 4 common HTTP request methods?
+            * (7) True or false: The response code can be written after the response body.
+            * (8) Respectively, what do the `json.Marshal` and `json.Unmarshal`/`json.Decoder.Decode` functions do?
 * __Week Three (under construction)__
     * __Day One:__ todo
