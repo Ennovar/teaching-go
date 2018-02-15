@@ -3,7 +3,7 @@ package about
 import (
 	"net/http"
 
-	"github.com/Ennovar/teaching-go/web/templates/pkg/handlers"
+	"github.com/Ennovar/teaching-go/web/templates_simple/pkg/handlers"
 )
 
 func Index(w http.ResponseWriter, _ *http.Request) {

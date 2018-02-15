@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"log"
 
-	"github.com/Ennovar/teaching-go/web/templates/pkg/handlers/index"
-	"github.com/Ennovar/teaching-go/web/templates/pkg/handlers/about"
+	"github.com/Ennovar/teaching-go/web/templates_simple/pkg/handlers/index"
+	"github.com/Ennovar/teaching-go/web/templates_simple/pkg/handlers/about"
 )
 
 func main() {

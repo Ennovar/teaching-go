@@ -1,6 +1,8 @@
 # Ennovar Go Course Cirriculum
 
-Course is structured for weekly sessions 4 days per week.
+A three week (4 days per week) course over Go centered around web development. After completing this course you should have the tools and experience required to be able to build web applications and independently further develop your knowledge in Go web programming. 
+
+This course is geared towards people who already have experience programming in other languages.
 
 * __Week One__
     * __Day One:__ Simple Data Types, Pointers, and Conditional Flow
@@ -32,7 +34,7 @@ Course is structured for weekly sessions 4 days per week.
         * `/basics/architecture/*`
         * Questions over conventions, commenting, and architecture.
         * Extra-curricular learning after week one: Todd McLeod's playlist on YouTube ["Build Web Apps with Golang"](https://www.youtube.com/playlist?list=PLSak_q1UXfPp2VwUQ4ZdUVJdMO6pfi5v_) (Start at video #4).
-* __Week Two (under construction)__
+* __Week Two__
     * __Day One:__ HTTP Protocol Basics
         * [Google Slides over HTTP Protocol](https://docs.google.com/presentation/d/1zhBy-JPEnv8wT42-xI_GyYihmN8DnpuYvnCPX8_VOZ4/edit?usp=sharing)
         * `/web/full_webserver_example/*`
@@ -48,3 +50,6 @@ Course is structured for weekly sessions 4 days per week.
         * `/web/templates/*`
         * Questions over the templating code
         * Create a web server with two routes that use templates. There is no need to make the templates look nice, just make it functional.
+    * __Day Four:__ Writing APIs alongside Templates
+* __Week Three (under construction)__
+    * __Day One:__ todo
