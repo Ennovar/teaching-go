@@ -79,7 +79,7 @@ func Get(email string) (*User, error) {
 
 	var u User
 
-	err = db.QueryRow(getQuery, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions)
+	err = db.QueryRow(getQuery, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
 	if err != nil {
 		return nil, err
 	}
