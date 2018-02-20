@@ -10,8 +10,14 @@
                     width:960px;
                     margin:0px auto;
                 }
-                .navigation, .content {
+
+                .navigation, .status, .content {
                     clear:both;
+                    margin:10px 0px;
+                }
+
+                .status p {
+                    margin:0;
                 }
             </style>
         </head>
@@ -19,6 +25,11 @@
             <div class="wrapper">
                 <div class="navigation">
                     {{ template "navigation" . }}
+                </div>
+                <div class="status">
+                    {{ if .StatusMessage }}
+                        <p>Status: {{ .StatusMessage }}</p>
+                    {{ end }}
                 </div>
                 <div class="content">
                     {{ template "content" . }}

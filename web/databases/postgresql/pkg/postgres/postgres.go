@@ -9,7 +9,7 @@ import (
 
 const(
 	user = "postgres"
-	password = "postgres"
+	password = ""
 	database = "teaching-go"
 )
 

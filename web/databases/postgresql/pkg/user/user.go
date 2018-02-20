@@ -1,22 +1,21 @@
 package user
 
 import (
-	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
 	"errors"
+
+	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
 )
 
 const (
-	tableQuery = `
-	CREATE TABLE IF NOT EXISTS users (
+	tableQuery = `CREATE TABLE IF NOT EXISTS users (
 		id serial PRIMARY KEY,
 		email text NOT NULL,
 		password varchar(60) NOT NULL,
 		permissions int8 NOT NULL
 	)`
 
-	getQuery = `
-	SELECT * FROM users WHERE email = $1
-	`
+	getQueryEmail = "SELECT * FROM users WHERE email = $1 LIMIT 1"
+	getQueryID    = "SELECT * FROM users WHERE ID = $1 LIMIT 1"
 )
 
 const (
@@ -26,18 +25,18 @@ const (
 )
 
 var (
-	ErrNotFound = errors.New("no rows were found")
+	ErrInvalidIdentifier = errors.New("the identifier used is not valid")
 )
 
 type User struct {
-	ID int `json:"id"`
-	Email string `json:"email"`
-	Password string `json:"password"`
-	Permissions int `json:"permissions"`
-	SessionID string `json:"sessionID,omitempty"`
+	ID          int    `json:"id"`
+	Email       string `json:"email"`
+	Password    string `json:"password"`
+	Permissions int    `json:"permissions"`
+	SessionID   string `json:"sessionID,omitempty"`
 }
 
-func createTable() (error) {
+func createTable() error {
 	db, err := postgres.Open()
 	if err != nil {
 		return err
@@ -60,13 +59,10 @@ func NewInstance(u *User) (*User, error) {
 	return u, createTable()
 }
 
-// Function Get intakes an email as a string and attempts to
-// get the user attached to that email.
-func Get(email string) (*User, error) {
-	if valid := validateEmail(email); !valid {
-		return nil, ErrEmailInvalid
-	}
-
+// Function Get intakes either an email of type string or
+// an ID of type int and gets the user based off of the
+// identifier given.
+func Get(identifier interface{}) (*User, error) {
 	if err := createTable(); err != nil {
 		return nil, err
 	}
@@ -79,19 +75,34 @@ func Get(email string) (*User, error) {
 
 	var u User
 
-	err = db.QueryRow(getQuery, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
-	if err != nil {
-		return nil, err
+	email, ok := identifier.(string)
+	if !ok {
+		id, ok := identifier.(int)
+		if !ok {
+			return nil, ErrInvalidIdentifier
+		}
+
+		err := db.QueryRow(getQueryID, id).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
+		if err != nil {
+			return nil, err
+		}
+
+		return &u, nil
 	}
 
-	if (User{}) == u {
-		return nil, ErrNotFound
+	if valid := validateEmail(email); !valid {
+		return nil, ErrEmailInvalid
+	}
+
+	err = db.QueryRow(getQueryEmail, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
+	if err != nil {
+		return nil, err
 	}
 
 	return &u, nil
 }
 
-func (u *User) GetStatus() (string) {
+func (u *User) GetStatus() string {
 	switch u.Permissions {
 	case regular:
 		return "regular"

@@ -11,7 +11,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	handlers.ExecutePublicTemplate(w, handlers.Data{
+	handlers.ExecuteTemplate(w, req, handlers.Data{
 		PageTitle: "Home",
 	}, "templates/content/index.html")
 }

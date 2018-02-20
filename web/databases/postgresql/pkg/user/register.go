@@ -6,6 +6,7 @@ import (
 
 	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/encryption"
 	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
+	"database/sql"
 )
 
 const registerQuery = `
@@ -56,7 +57,7 @@ func (u *User) Register() error {
 
 	// Check if email already exists
 	_, err = Get(u.Email)
-	if err != ErrNotFound {
+	if err != sql.ErrNoRows {
 		return ErrEmailExists
 	}
 
