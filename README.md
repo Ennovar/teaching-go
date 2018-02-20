@@ -18,7 +18,7 @@ This course is geared towards people who already have experience programming in 
         * `/basics/data_types/slices.go`
         * `/basics/data_types/maps.go`
         * `/basics/loops/main.go`
-        * Todo: Day Two Exercise
+        * Create an application that loops through a map with indexes of type int and keys of type string slice. Populate the map with random data and create a for loop that loops through all of keys of the map as well as all of the keys of each slice within the map.
     * __Day Three:__ Functions and Structures
         * `/basics/functions/main.go`
         * `/basics/data_types/structures.go`
@@ -62,5 +62,14 @@ This course is geared towards people who already have experience programming in 
             * (6) What are 4 common HTTP request methods?
             * (7) True or false: The response code can be written after the response body.
             * (8) Respectively, what do the `json.Marshal` and `json.Unmarshal`/`json.Decoder.Decode` functions do?
-* __Week Three (under construction)__
-    * __Day One:__ todo
+* __Week Three__
+    * __Day One:__ Interfacing with a Postgresql Database
+        * `/web/databases/postgres/*`
+        * Questions over interfacing with postgresql
+    * __Day Two:__
+        * Create an application utilizing postgresql that handles users. Make use of public and private templates depending on the login status of the user.
+    * __ Day Three:__
+        * Continue day two.
+    * __Day Four:__ Interfacing with BoltDB (NoSQL)
+            * `/web/databases/boltdb/*`
+            * Questions over interfacing with BoltDB
