@@ -1,9 +1,11 @@
 package user
 
 import (
-	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
-	"regexp"
 	"errors"
+	"regexp"
+
+	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/encryption"
+	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
 )
 
 const registerQuery = `
@@ -15,8 +17,9 @@ INSERT INTO users (
 
 var (
 	ErrEmailInvalid = errors.New("invalid email address")
-	ErrPassLength = errors.New("password cannot be less than 8 characters")
-	ErrPermInvalid = errors.New("user assigned invalid permission")
+	ErrPassLength   = errors.New("password cannot be less than 8 characters")
+	ErrPermInvalid  = errors.New("user assigned invalid permission")
+	ErrEmailExists  = errors.New("a user already exists with the given email")
 )
 
 func validateEmail(email string) bool {
@@ -25,6 +28,10 @@ func validateEmail(email string) bool {
 	return rx.MatchString(email)
 }
 
+// Function Register is attached to the user struct and
+// will attempt to register a new user. To get the user
+// struct for registering, utilize the function
+// user.NewInstance().
 func (u *User) Register() error {
 	db, err := postgres.Open()
 	if err != nil {
@@ -48,7 +55,20 @@ func (u *User) Register() error {
 	}
 
 	// Check if email already exists
+	_, err = Get(u.Email)
+	if err != ErrNotFound {
+		return ErrEmailExists
+	}
 
+	p, err := encryption.HashPassword(u.Password)
+	if err != nil {
+		return err
+	}
+
+	_, err = db.Exec(registerQuery, u.Email, p, u.Permissions)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

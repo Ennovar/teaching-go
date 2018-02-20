@@ -21,15 +21,20 @@ const (
 
 const (
 	regular = iota
-	moderator = iota
-	administrator = iota
+	moderator
+	administrator
+)
+
+var (
+	ErrNotFound = errors.New("no rows were found")
 )
 
 type User struct {
 	ID int `json:"id"`
 	Email string `json:"email"`
 	Password string `json:"password"`
-	Permissions int `json"permissions"`
+	Permissions int `json:"permissions"`
+	SessionID string `json:"sessionID,omitempty"`
 }
 
 func createTable() (error) {
@@ -79,5 +84,22 @@ func Get(email string) (*User, error) {
 		return nil, err
 	}
 
+	if (User{}) == u {
+		return nil, ErrNotFound
+	}
+
 	return &u, nil
+}
+
+func (u *User) GetStatus() (string) {
+	switch u.Permissions {
+	case regular:
+		return "regular"
+	case moderator:
+		return "moderator"
+	case administrator:
+		return "administrator"
+	default:
+		return ""
+	}
 }

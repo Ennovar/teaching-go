@@ -1,12 +1,14 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"log"
+	"net/http"
+
+	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/handlers/index"
 )
 
-const(
+const (
 	publicPort = 3000
 )
 
@@ -15,7 +17,7 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", assets))
 
 	// Index Handler
-	http.HandleFunc("/", nil)
+	http.HandleFunc("/", index.Index)
 
 	// User Handlers
 	http.HandleFunc("/user", nil)
