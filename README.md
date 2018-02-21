@@ -68,7 +68,7 @@ This course is geared towards people who already have experience programming in 
         * Questions over interfacing with postgresql
     * __Day Two:__
         * Create an application utilizing postgresql that handles users. Make use of public and private templates depending on the login status of the user.
-    * __ Day Three:__
+    * __Day Three:__
         * Continue day two.
     * __Day Four:__ Interfacing with BoltDB (NoSQL)
             * `/web/databases/boltdb/*`
