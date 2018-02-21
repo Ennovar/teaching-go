@@ -71,5 +71,5 @@ This course is geared towards people who already have experience programming in 
     * __Day Three:__
         * Continue day two.
     * __Day Four:__ Interfacing with BoltDB (NoSQL)
-            * `/web/databases/boltdb/*`
-            * Questions over interfacing with BoltDB
+         * `/web/databases/boltdb/*`
+         * Questions over interfacing with BoltDB
