@@ -3,3 +3,12 @@
 
 # Ignore boltdb files
 **.db
+*.db
+
+**/main
+*/main
+main
+
+**/main.exe
+*/main.exe
+main.exe

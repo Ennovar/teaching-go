@@ -4,14 +4,16 @@ import (
 	"errors"
 
 	"github.com/Ennovar/teaching-go/web/databases/postgresql/pkg/postgres"
+	"database/sql"
 )
 
 const (
 	tableQuery = `CREATE TABLE IF NOT EXISTS users (
-		id serial PRIMARY KEY,
+		id SERIAL PRIMARY KEY,
 		email text NOT NULL,
 		password varchar(60) NOT NULL,
-		permissions int8 NOT NULL
+		permissions int8 NOT NULL,
+		session_id varchar(16)
 	)`
 
 	getQueryEmail = "SELECT * FROM users WHERE email = $1 LIMIT 1"
@@ -82,9 +84,14 @@ func Get(identifier interface{}) (*User, error) {
 			return nil, ErrInvalidIdentifier
 		}
 
-		err := db.QueryRow(getQueryID, id).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
+		var sessionVal sql.NullString
+		err := db.QueryRow(getQueryID, id).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &sessionVal)
 		if err != nil {
 			return nil, err
+		}
+
+		if sessionVal.Valid {
+			u.SessionID = sessionVal.String
 		}
 
 		return &u, nil
@@ -94,9 +101,14 @@ func Get(identifier interface{}) (*User, error) {
 		return nil, ErrEmailInvalid
 	}
 
-	err = db.QueryRow(getQueryEmail, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &u.SessionID)
+	var sessionVal sql.NullString
+	err = db.QueryRow(getQueryEmail, email).Scan(&u.ID, &u.Email, &u.Password, &u.Permissions, &sessionVal)
 	if err != nil {
 		return nil, err
+	}
+
+	if sessionVal.Valid {
+		u.SessionID = sessionVal.String
 	}
 
 	return &u, nil

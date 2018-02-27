@@ -8,9 +8,9 @@ import (
 )
 
 const(
-	user = "postgres"
-	password = ""
-	database = "teaching-go"
+	user = "root"
+	password = "root"
+	database = "teachinggo"
 )
 
 func Open() (*sql.DB, error) {

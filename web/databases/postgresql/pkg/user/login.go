@@ -6,9 +6,8 @@ import (
 )
 
 const loginQuery = `UPDATE users
-SET sessionID=$1
-WHERE ID=$2
-LIMIT 1`
+SET session_id=$1
+WHERE ID=$2`
 
 // Function login takes a user struct and will log the
 // user into the system by generating a session ID to

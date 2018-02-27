@@ -2,7 +2,7 @@
 2. nil
 3. html/template
 4. {{ define "layout" }} ... html content... {{ end }}
-5. {{ template "navigation" }}
+5. {{ template "navigation" . }}
 6. POST, PUT, DELETE, GET
 7. False
 8. json.Marshal takes an interface and marshals it into a stringified JSON object ready to be written to the response body. json.Unmarshal/json.Decoder.Decode takes a slice of bytes or a io.Reader type, respectively, each of which containing a stringified JSON object, and inserts the values into an interface.

@@ -11,9 +11,10 @@ import (
 // This new type, Data, will be used to shuttle data
 // from the server into the templates.
 type Data struct {
-	PageTitle string
+	PageTitle     string
 	StatusMessage string
-	ExtraData interface{}
+	Private       bool
+	ExtraData     interface{}
 }
 
 // This function will effectively reuse a bulk of the
@@ -30,7 +31,7 @@ func ExecuteTemplate(w http.ResponseWriter, req *http.Request, data Data, conten
 		contentTemplate,
 	}
 
-	c, err := req.Cookie("postgres-user")
+	c, err := req.Cookie("teachinggo")
 	if err == nil {
 		// Cookie is split by : with their ID on the left
 		// of it and the sessionID on the right
@@ -44,14 +45,22 @@ func ExecuteTemplate(w http.ResponseWriter, req *http.Request, data Data, conten
 					"templates/navigation/navigation.private.html",
 					contentTemplate,
 				}
+
+				t := template.Must(template.ParseFiles(templateFiles...))
+				t.ExecuteTemplate(w, "layout", data)
+				return
 			}
 		}
+	}
+
+	if data.Private {
+		http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+		return
 	}
 
 	t := template.Must(template.ParseFiles(templateFiles...))
 	t.ExecuteTemplate(w, "layout", data)
 }
-
 
 // Function ParseFormValues intakes a slice of strings that
 // contains the index of all required form values as well as

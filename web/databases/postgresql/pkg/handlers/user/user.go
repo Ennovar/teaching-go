@@ -10,6 +10,52 @@ import (
 )
 
 func Login(w http.ResponseWriter, req *http.Request) {
+	if req.Method == "POST" {
+		req.ParseForm()
+
+		if ok := handlers.ParseFormValues([]string{"email", "password"}, req); !ok {
+			w.WriteHeader(http.StatusBadRequest)
+			handlers.ExecuteTemplate(w, req, handlers.Data{
+				PageTitle: "Login",
+				StatusMessage: "All form values must be filled out in order to login.",
+			}, "templates/content/user/login.html")
+			return
+		}
+
+		u, err := user.Get(req.Form["email"][0])
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			handlers.ExecuteTemplate(w, req, handlers.Data{
+				PageTitle: "Login",
+				StatusMessage: fmt.Sprintf("An error has occurred: %v", err.Error()),
+			}, "templates/content/user/login.html")
+			return
+		}
+
+		sessionValue, err := u.Login(req.Form["password"][0])
+		if err != nil {
+			handlers.ExecuteTemplate(w, req, handlers.Data{
+				PageTitle: "Login",
+				StatusMessage: fmt.Sprintf("An error has occurred: %v", err.Error()),
+			}, "templates/content/user/login.html")
+			return
+		}
+
+		c := http.Cookie{
+			Name: "teachinggo",
+			Value: u.Email+":"+sessionValue,
+			Expires: time.Now().Add(7 * 24 * time.Hour),
+			Path: "/",
+		}
+		http.SetCookie(w, &c)
+
+		handlers.ExecuteTemplate(w, req, handlers.Data{
+			PageTitle: "Dashboard",
+			Private: true,
+		}, "templates/content/user/dashboard.html")
+		return
+	}
+
 	handlers.ExecuteTemplate(w, req, handlers.Data{
 		PageTitle: "Login",
 	}, "templates/content/user/login.html")
@@ -63,14 +109,16 @@ func Register(w http.ResponseWriter, req *http.Request) {
 func Dashboard(w http.ResponseWriter, req *http.Request) {
 	handlers.ExecuteTemplate(w, req, handlers.Data{
 		PageTitle: "Dashboard",
+		Private: true,
 	}, "templates/content/user/dashboard.html")
 }
 
 func Logout(w http.ResponseWriter, req *http.Request) {
 	http.SetCookie(w, &http.Cookie{
-		Name:    "postgres-user",
+		Name:    "teachinggo",
 		Value:   "",
 		Expires: time.Unix(0, 0),
+		Path: "/",
 	})
 
 	handlers.ExecuteTemplate(w, req, handlers.Data{
