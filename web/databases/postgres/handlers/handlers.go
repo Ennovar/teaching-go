@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var handler *sql.DB
+var Database *sql.DB
 
 func init() {
 	var dbName, dbUser, dbPass string
@@ -20,12 +20,12 @@ func init() {
 	var err error
 	conn := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", dbUser, dbPass, dbName)
 
-	handler, err = sql.Open("postgres", conn)
+	Database, err = sql.Open("postgres", conn)
 	if err != nil {
 		log.Fatalf("A fatal error has occurred: %v\n", err.Error())
 	}
 
-	tableTx, err := handler.Begin()
+	tableTx, err := Database.Begin()
 	if err != nil {
 		log.Fatalf("A fatal error has occurred: %v\n", err.Error())
 	}
